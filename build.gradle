@@ -5,7 +5,6 @@ buildscript {
         maven { url = "https://files.minecraftforge.net/maven" }
         maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
         maven { url = "https://jitpack.io" }
-        maven { url = "https://repo.essential.gg/repository/maven-public" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
@@ -37,21 +36,6 @@ minecraft {
     replace "@VER@", projectVersion
     replace "@ID@", projectId
     clientRunArgs += "--mixin mixins.tabstats.json"
-}
-
-// ============= Repo & Dep =============
-repositories {
-    mavenCentral()
-    maven { url = "https://files.minecraftforge.net/maven" }
-    maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
-    maven { url = "https://jitpack.io" }
-    maven { url = "https://repo.essential.gg/repository/maven-public" }
-}
-
-dependencies {
-    implementation "gg.essential:vigilance-1.8.9-forge:${vigilanceVersion}"
-    compile 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
-    annotationProcessor 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
 }
 
 // ============= Resource =============
@@ -109,9 +93,28 @@ mixin {
     add sourceSets.main, "mixins.tabstats.refmap.json"
 }
 
+sourceSets {
+    main {
+        ext.refMap = "mixins.tabstats.refmap.json"
+    }
+}
+
 configurations {
     shade
     implementation.extendsFrom(shade)
+}
+
+// ============= Repo & Dep =============
+repositories {
+    mavenCentral()
+    maven { url = "https://files.minecraftforge.net/maven" }
+    maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
+    maven { url = "https://jitpack.io" }
+}
+
+dependencies {
+    shade 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
+    annotationProcessor 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
 }
 
 // ============= ShadowJar Config =============
@@ -128,11 +131,4 @@ reobf {
     }
 }
 
-sourceSets {
-    main {
-        ext.refMap = "mixins.tabstats.refmap.json"
-    }
-}
-
 tasks.reobfJar.dependsOn tasks.shadowJar
-jar.finalizedBy shadowJar
