@@ -3,10 +3,9 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url = "https://files.minecraftforge.net/maven" }
-        mavenCentral()
-        maven { url = "https://repo.spongepowered.org/maven" }
+        maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
         maven { url = "https://jitpack.io" }
-        maven { url = "https://repo.sk1er.club/repository/maven-public/" }
+        maven { url = "https://repo.essential.gg/repository/maven-public" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
@@ -43,21 +42,16 @@ minecraft {
 // ============= Repo & Dep =============
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io/' }
-    maven { url 'https://repo.essential.gg/repository/maven-public' }
-    maven { url 'https://repo.spongepowered.org/repository/maven-public/' }
+    maven { url = "https://files.minecraftforge.net/maven" }
+    maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
+    maven { url = "https://jitpack.io" }
+    maven { url = "https://repo.essential.gg/repository/maven-public" }
 }
 
 dependencies {
     implementation "gg.essential:vigilance-1.8.9-forge:${vigilanceVersion}"
-    compile 'org.spongepowered:mixin:0.7.10-20180616.121809-3'
-}
-
-// ============= Mixin Config =============
-mixin {
-    disableRefMapWarning = true
-    defaultObfuscationEnv searge
-    add sourceSets.main, "mixins.tabstats.refmap.json"
+    compile 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
+    annotationProcessor 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
 }
 
 // ============= Resource =============
@@ -80,7 +74,7 @@ processResources {
     }
 }
 
-// ============= Custom Task =============
+// ============= Resources Movement Task =============
 task moveResources {
     doLast {
         try {
@@ -108,12 +102,16 @@ jar {
     enabled = false
 }
 
-configurations {
-    shade
+// ============= Mixin Config =============
+mixin {
+    disableRefMapWarning = true
+    defaultObfuscationEnv searge
+    add sourceSets.main, "mixins.tabstats.refmap.json"
 }
 
-afterEvaluate {
-    configurations.implementation.extendsFrom(configurations.shade)
+configurations {
+    shade
+    implementation.extendsFrom(shade)
 }
 
 // ============= ShadowJar Config =============
