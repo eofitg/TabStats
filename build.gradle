@@ -1,10 +1,26 @@
-plugins {
-    id "net.minecraftforge.gradle.forge" version "6f53277"
-    id "com.github.johnrengelman.shadow" version "6.1.0"
-    id 'org.spongepowered.mixin' version "d5f9873"
-    id "java"
+// ============= Use buildscript & apply method for ForgeGradle 2.1  =============
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url = "https://files.minecraftforge.net/maven" }
+        mavenCentral()
+        maven { url = "https://repo.spongepowered.org/maven" }
+        maven { url = "https://jitpack.io" }
+        maven { url = "https://repo.sk1er.club/repository/maven-public/" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.4'
+    }
 }
 
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
+// ============= Project Info =============
 version = projectVersion
 group = projectGroup
 archivesBaseName = projectName
@@ -12,52 +28,59 @@ archivesBaseName = projectName
 sourceCompatibility = targetCompatibility = 1.8
 compileJava.options.encoding = "UTF-8"
 
+// ============= Forge Config =============
 minecraft {
     version = "1.8.9-11.15.1.2318-1.8.9"
     runDir = "run"
     mappings = "stable_22"
     makeObfSourceJar = false
-    replace("@NAME@", projectName)
-    replace("@VER@": projectVersion)
-    replace("@ID@", projectId)
+    replace "@NAME@", projectName
+    replace "@VER@", projectVersion
+    replace "@ID@", projectId
     clientRunArgs += "--mixin mixins.tabstats.json"
 }
 
-configurations {
-    shade
-    implementation.extendsFrom(shade)
-}
-
+// ============= Repo & Dep =============
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io/' }
-    maven { url "https://repo.sk1er.club/repository/maven-public/" }
+    maven { url 'https://repo.essential.gg/repository/maven-public' }
     maven { url 'https://repo.spongepowered.org/repository/maven-public/' }
 }
 
 dependencies {
-    implementation("gg.essential:vigilance-1.8.9-forge:${vigilanceVersion}")
-    compile 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
-    annotationProcessor 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
+    implementation "gg.essential:vigilance-1.8.9-forge:${vigilanceVersion}"
+    compile 'org.spongepowered:mixin:0.7.10-20180616.121809-3'
 }
 
+// ============= Mixin Config =============
+mixin {
+    disableRefMapWarning = true
+    defaultObfuscationEnv searge
+    add sourceSets.main, "mixins.tabstats.refmap.json"
+}
+
+// ============= Resource =============
 processResources {
     inputs.property("version", version)
     inputs.property("mcversion", minecraft.version)
 
-    filesMatching("mcmod.info") {
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
         expand(
-                "id": projectId,
-                "name": projectName,
-                "version": version,
-                "mcversion": minecraft.version
+                id: projectId,
+                name: projectName,
+                version: version,
+                mcversion: minecraft.version
         )
     }
+
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 }
 
+// ============= Custom Task =============
 task moveResources {
     doLast {
         try {
@@ -66,7 +89,7 @@ task moveResources {
                     todir: "${buildDir}/classes/java"
             )
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace()
         }
     }
 }
@@ -74,6 +97,7 @@ task moveResources {
 moveResources.dependsOn processResources
 classes.dependsOn moveResources
 
+// ============= Jar Config =============
 jar {
     manifest.attributes(
             "ForceLoadAsMod": true,
@@ -81,29 +105,30 @@ jar {
             "ModSide": "CLIENT",
             "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
     )
-
     enabled = false
 }
 
-mixin {
-    disableRefMapWarning = true
-    defaultObfuscationEnv searge
-    add sourceSets.main, "mixins.tabstats.refmap.json"
+configurations {
+    shade
 }
 
+afterEvaluate {
+    configurations.implementation.extendsFrom(configurations.shade)
+}
+
+// ============= ShadowJar Config =============
 shadowJar {
     configurations = [project.configurations.shade]
     duplicatesStrategy DuplicatesStrategy.EXCLUDE
-
-    archiveClassifier.set("")
+    classifier = ""
 }
 
+// ============= Reobf Config =============
 reobf {
     shadowJar {
         mappingType = "SEARGE"
     }
 }
-
 
 sourceSets {
     main {
@@ -112,6 +137,4 @@ sourceSets {
 }
 
 tasks.reobfJar.dependsOn tasks.shadowJar
-moveResources.dependsOn(processResources)
-classes.dependsOn(moveResources)
-jar.finalizedBy(shadowJar)
+jar.finalizedBy shadowJar
