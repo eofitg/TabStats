@@ -1,6 +1,7 @@
 package club.maxstats.tabstats;
 
 import club.maxstats.tabstats.config.TabStatsConfig;
+import club.maxstats.tabstats.command.TabStatsCommand;
 import club.maxstats.tabstats.listener.ApiKeyListener;
 import club.maxstats.tabstats.listener.GameOverlayListener;
 import club.maxstats.tabstats.playerapi.WorldLoader;
@@ -45,6 +46,7 @@ public class TabStats {
         this.config = new TabStatsConfig();
         this.statWorld = new WorldLoader();
         this.registerListeners(this.statWorld, new GameOverlayListener(), new ApiKeyListener());
+        this.registerCommands(new TabStatsCommand());
     }
 
     /* Post Initialization Event, Called after the initialization of Forge */
