@@ -132,3 +132,4 @@ reobf {
 }
 
 tasks.reobfJar.dependsOn tasks.shadowJar
+jar.finalizedBy(shadowJar)
