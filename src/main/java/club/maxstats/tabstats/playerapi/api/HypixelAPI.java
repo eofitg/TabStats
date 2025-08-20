@@ -36,8 +36,8 @@ public class HypixelAPI {
         } else {
             // String.format is basically constructing a String. %s is a placeholder which is defined by the strings placed after the initial String.
             // so String.format("%s", "hello"); is the same as "hello"
-            // String.format("https://api.hypixel.net/player?key=%s&uuid=%s", key, uuid); is basically placing the key in the first placeholder, and uuid in the second
-            String requestURL = String.format("https://api.hypixel.net/player?key=%s&uuid=%s", key, uuid.replace("-", ""));
+            // String.format("https://api.hypixel.net/v2/player?key=%s&uuid=%s", key, uuid); is basically placing the key in the first placeholder, and uuid in the second
+            String requestURL = String.format("https://api.hypixel.net/v2/player?key=%s&uuid=%s", key, uuid.replace("-", ""));
             try (CloseableHttpClient client = HttpClients.createDefault()) {
                 HttpGet request = new HttpGet(requestURL);
                 JsonParser parser = new JsonParser();
