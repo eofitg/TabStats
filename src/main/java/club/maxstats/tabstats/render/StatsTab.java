@@ -27,13 +27,11 @@ import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldSettings;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.text.WordUtils;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Comparator;
 import java.util.List;
@@ -244,10 +242,10 @@ public class StatsTab extends GuiPlayerTabOverlay {
             if (this.lastTimeOpened == playerInfo.func_178855_p()) {
                 if (i < playerInfo.func_178835_l()) {
                     playerInfo.func_178846_a(Minecraft.getSystemTime());
-                    playerInfo.func_178844_b((long)(this.guiIngame.getUpdateCounter() + 20));
+                    playerInfo.func_178844_b(this.guiIngame.getUpdateCounter() + 20);
                 } else if (i > playerInfo.func_178835_l()) {
                     playerInfo.func_178846_a(Minecraft.getSystemTime());
-                    playerInfo.func_178844_b((long)(this.guiIngame.getUpdateCounter() + 10));
+                    playerInfo.func_178844_b(this.guiIngame.getUpdateCounter() + 10);
                 }
             }
 
@@ -330,7 +328,7 @@ public class StatsTab extends GuiPlayerTabOverlay {
         String playerRank = hPlayer.getPlayerRank();
 
         if (team != null) {
-            /** remove [NON] as it's not shown in regular tab */
+            /* remove [NON] as it's not shown in regular tab */
             String colorPrefix = team.getColorPrefix();
             if (ChatColor.stripColor(colorPrefix).contains(ChatColor.stripColor(playerRank))) {
                 playerRank = "";

@@ -1,6 +1,5 @@
 package club.maxstats.tabstats.playerapi.api;
 
-import club.maxstats.tabstats.TabStats;
 import club.maxstats.tabstats.config.TabStatsConfig;
 import club.maxstats.tabstats.playerapi.api.games.HypixelGames;
 import club.maxstats.tabstats.playerapi.exception.*;
@@ -17,8 +16,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HypixelAPI {
+    private static final Logger logger = Logger.getLogger(HypixelAPI.class.getName());
     private final String key = TabStatsConfig.getApiKey();
     public JsonObject achievementObj;
     public JsonObject playerObject;
@@ -43,7 +45,7 @@ public class HypixelAPI {
                 HttpGet request = new HttpGet(requestURL);
                 JsonParser parser = new JsonParser();
 
-                System.out.println("Stat checking " + uuid);
+                logger.info("Stat checking " + uuid);
                 try {
                     StringWriter writer = new StringWriter();
                     IOUtils.copy(new InputStreamReader(client.execute(request).getEntity().getContent(), StandardCharsets.UTF_8), writer);
@@ -62,8 +64,7 @@ public class HypixelAPI {
                 else if (obj.get("success").getAsString().equals("false"))
                     throw new ApiRequestException();
             } catch (IOException ex) {
-                System.out.println("Error with setGameData");
-                ex.printStackTrace();
+                logger.log(Level.SEVERE, "Error with setGameData", ex);
             }
         }
 
@@ -105,12 +106,10 @@ public class HypixelAPI {
                 JsonObject object = jsonParser.parse(new InputStreamReader(is, StandardCharsets.UTF_8)).getAsJsonObject();
                 uuid = object.get("id").getAsString();
             } catch (NullPointerException ex) {
-                System.out.println("Could not get UUID");
-                ex.printStackTrace();
+                logger.log(Level.WARNING, "Could not get UUID for name: " + name, ex);
             }
         } catch (IOException ex) {
-            System.out.println("Could not get UUID");
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Could not get UUID for name: " + name, ex);
         }
 
         return uuid;

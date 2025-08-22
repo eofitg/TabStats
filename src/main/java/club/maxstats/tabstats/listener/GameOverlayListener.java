@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameOverlayListener {
-    private StatsTab statsTab;
-    private Minecraft mc = Minecraft.getMinecraft();
+    private final StatsTab statsTab;
+    private final Minecraft mc = Minecraft.getMinecraft();
 
     public GameOverlayListener() {
         this.statsTab = new StatsTab(this.mc, this.mc.ingameGUI);
