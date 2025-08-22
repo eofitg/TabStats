@@ -1,6 +1,7 @@
 package club.maxstats.tabstats.render;
 
 import club.maxstats.tabstats.TabStats;
+import club.maxstats.tabstats.config.TabStatsConfig;
 import club.maxstats.tabstats.playerapi.HPlayer;
 import club.maxstats.tabstats.playerapi.api.stats.Stat;
 import club.maxstats.tabstats.playerapi.api.stats.StatDouble;
@@ -73,9 +74,9 @@ public class StatsTab extends GuiPlayerTabOverlay {
         int startingX = scaledRes.getScaledWidth() / 2 - width / 2;
         int startingY = 12;
 
-        final float tabScale = (float)TabStats.getTabStats().getConfig().getTabScale() / 4f;
-        final RGBA outerColor = RGBA.adjustOpacity(TabStats.getTabStats().getConfig().getOuterTabBgColor().getRGB(), TabStats.getTabStats().getConfig().getTabOpacity());
-        final RGBA innerColor = RGBA.adjustOpacity(TabStats.getTabStats().getConfig().getInnerTabBgColor().getRGB(), TabStats.getTabStats().getConfig().getTabOpacity());
+        final float tabScale = (float) TabStatsConfig.getTabScale() / 4f;
+        final RGBA outerColor = RGBA.adjustOpacity(TabStatsConfig.getOuterTabBgColor().getRGB(), TabStatsConfig.getTabOpacity());
+        final RGBA innerColor = RGBA.adjustOpacity(TabStatsConfig.getInnerTabBgColor().getRGB(), TabStatsConfig.getTabOpacity());
 
         GlStateManager.pushMatrix();
         GlStateManager.scale(tabScale, tabScale, tabScale);
@@ -119,7 +120,7 @@ public class StatsTab extends GuiPlayerTabOverlay {
 
         /* Start with drawing the name and objective, as they will always be here and aren't inside of the Stat List */
         int statXSpacer = startingX + headSize + 2;
-        if (TabStats.getTabStats().getConfig().getTextShadow()) {
+        if (TabStatsConfig.getTextShadow()) {
             this.mc.fontRendererObj.drawStringWithShadow(ChatColor.BOLD + "NAME", statXSpacer, startingY + (this.entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
             this.mc.fontRendererObj.drawStringWithShadow(objectiveName, startingX - (this.mc.fontRendererObj.getStringWidth(objectiveName) + 5), startingY + (this.entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
         } else {
@@ -132,7 +133,7 @@ public class StatsTab extends GuiPlayerTabOverlay {
         /* loops through all the stats that should be displayed and renders their stat titles */
         for (Stat stat : gameStatTitleList) {
             String statName = stat.getStatName();
-            if (TabStats.getTabStats().getConfig().getTextShadow())
+            if (TabStatsConfig.getTextShadow())
                 this.mc.fontRendererObj.drawStringWithShadow(ChatColor.BOLD + statName, statXSpacer, startingY + (this.entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
             else
                 this.mc.fontRendererObj.drawString(ChatColor.BOLD + statName, statXSpacer, startingY + (this.entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
@@ -205,7 +206,7 @@ public class StatsTab extends GuiPlayerTabOverlay {
                         }
 
                         // draws the stats
-                        if (TabStats.getTabStats().getConfig().getTextShadow())
+                        if (TabStatsConfig.getTextShadow())
                             this.mc.fontRendererObj.drawStringWithShadow(statValue, valueXSpacer, ySpacer + (this.entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
                         else
                             this.mc.fontRendererObj.drawString(statValue, valueXSpacer, ySpacer + (this.entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
@@ -214,7 +215,7 @@ public class StatsTab extends GuiPlayerTabOverlay {
                 }
 
                 // draws the players name
-                if (TabStats.getTabStats().getConfig().getTextShadow())
+                if (TabStatsConfig.getTextShadow())
                     this.mc.fontRendererObj.drawStringWithShadow(name, xSpacer, ySpacer + (this.entryHeight / 2 - 4), -1);
                 else
                     this.mc.fontRendererObj.drawString(name, xSpacer, ySpacer + (this.entryHeight / 2 - 4), -1);

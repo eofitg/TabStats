@@ -1,6 +1,7 @@
 package club.maxstats.tabstats.listener;
 
 import club.maxstats.tabstats.TabStats;
+import club.maxstats.tabstats.config.TabStatsConfig;
 import club.maxstats.tabstats.util.ChatColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
@@ -15,7 +16,7 @@ public class ApiKeyListener {
         if (message.startsWith("Your new API key is ")) {
             String apiKey = message.replace("Your new API key is ", "");
             Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(ChatColor.GREEN + "TabStats found and set API Key!"));
-            TabStats.getTabStats().getConfig().setApiKey(apiKey);
+            TabStatsConfig.setApiKey(apiKey);
             TabStats.getTabStats().getStatWorld().clearCache();
         }
     }

@@ -1,6 +1,7 @@
 package club.maxstats.tabstats.playerapi.api;
 
 import club.maxstats.tabstats.TabStats;
+import club.maxstats.tabstats.config.TabStatsConfig;
 import club.maxstats.tabstats.playerapi.api.games.HypixelGames;
 import club.maxstats.tabstats.playerapi.exception.*;
 import com.google.gson.JsonObject;
@@ -18,7 +19,7 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
 public class HypixelAPI {
-    private final String key = TabStats.getTabStats().getConfig().getApiKey();
+    private final String key = TabStatsConfig.getApiKey();
     public JsonObject achievementObj;
     public JsonObject playerObject;
 

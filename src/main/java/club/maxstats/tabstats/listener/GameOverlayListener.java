@@ -1,6 +1,7 @@
 package club.maxstats.tabstats.listener;
 
 import club.maxstats.tabstats.TabStats;
+import club.maxstats.tabstats.config.TabStatsConfig;
 import club.maxstats.tabstats.playerapi.HPlayer;
 import club.maxstats.tabstats.playerapi.api.stats.Stat;
 import club.maxstats.tabstats.render.StatsTab;
@@ -24,7 +25,7 @@ public class GameOverlayListener {
     @SubscribeEvent
     public void onOverlayRender(RenderGameOverlayEvent.Pre event) {
         /* checking if the event is rendering player list, if it is, cancel the current render and render the new overlay */
-        if (TabStats.getTabStats().getConfig().isModToggled()) {
+        if (TabStatsConfig.isModToggled()) {
             if (event.type == RenderGameOverlayEvent.ElementType.PLAYER_LIST) {
                 event.setCanceled(true);
                 Scoreboard scoreboard = this.mc.thePlayer.getWorldScoreboard();
