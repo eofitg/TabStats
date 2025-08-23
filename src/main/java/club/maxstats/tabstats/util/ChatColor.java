@@ -28,7 +28,7 @@ public enum ChatColor {
     ITALIC('o', 0, true),
     RESET('r', 0);
 
-    public static final char COLOR_CHAR = '\u00A7';
+    public static final char COLOR_CHAR = '§';
     private static final Pattern STRIP_COLOR_PATTERN = Pattern.compile("(?i)" + COLOR_CHAR + "[0-9A-FK-OR]");
 
     private final char code;

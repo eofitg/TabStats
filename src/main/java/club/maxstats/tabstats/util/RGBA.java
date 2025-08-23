@@ -1,7 +1,5 @@
 package club.maxstats.tabstats.util;
 
-import java.awt.*;
-
 public class RGBA {
     private int red;
     private int green;
@@ -17,7 +15,7 @@ public class RGBA {
         this.value = ((opacity & 0xFF) << 24) |
                 ((red & 0xFF) << 16) |
                 ((green & 0xFF) << 8)  |
-                ((blue & 0xFF) << 0);
+                ((blue & 0xFF));
     }
 
     public RGBA(int color) {

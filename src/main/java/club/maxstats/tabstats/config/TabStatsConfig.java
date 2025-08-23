@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class TabStatsConfig {
     private static final Logger logger = Logger.getLogger(TabStatsConfig.class.getName());
-    private static final File configFile = new File("./config", References.MODID + ".properties");
+    private static final File configFile = new File("./config", References.MOD_ID + ".properties");
     private static final Properties props = new Properties();
 
     // ================= Configuration fields =================
@@ -68,7 +68,7 @@ public class TabStatsConfig {
             props.setProperty("innerTabBgColor", String.valueOf(innerTabBgColor.getRGB()));
 
             if (!configFile.getParentFile().exists()) configFile.getParentFile().mkdirs();
-            props.store(new FileWriter(configFile), References.MODNAME + " Config");
+            props.store(new FileWriter(configFile), References.MOD_NAME + " Config");
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Failed to save TabStats configuration", e);
         }

@@ -1,14 +1,11 @@
 package club.maxstats.tabstats.util;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Handler {
     public static final Locale LOCALE = getLocale();
