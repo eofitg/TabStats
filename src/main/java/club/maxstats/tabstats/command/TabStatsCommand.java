@@ -43,7 +43,7 @@ public class TabStatsCommand extends CommandBase {
         switch (option) {
             case "toggle": {
                 TabStatsConfig.setToggleMod(!TabStatsConfig.isModToggled());
-                sender.addChatMessage(new ChatComponentText("§aTabStats Mod toggled: " + TabStatsConfig.isModToggled()));
+                sender.addChatMessage(new ChatComponentText("§aTabStats mod toggled: " + TabStatsConfig.isModToggled()));
                 break;
             }
             case "apikey": {
