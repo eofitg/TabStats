@@ -63,7 +63,7 @@ public class TabStatsCommand extends CommandBase {
             case "scale": {
                 if (args.length >= 2) {
                     try {
-                        TabStatsConfig.setTabScale(Integer.parseInt(args[1]));
+                        TabStatsConfig.setTabScale(Float.parseFloat(args[1]));
                         sender.addChatMessage(new ChatComponentText("§aTab scale set: " + TabStatsConfig.getTabScale()));
                     } catch (NumberFormatException e) {
                         sender.addChatMessage(new ChatComponentText("§cPlease enter a valid number!"));
@@ -76,7 +76,7 @@ public class TabStatsCommand extends CommandBase {
             case "xoffset": {
                 if (args.length >= 2) {
                     try {
-                        TabStatsConfig.setTabXOffset(Integer.parseInt(args[1]));
+                        TabStatsConfig.setTabXOffset(Float.parseFloat(args[1]));
                         sender.addChatMessage(new ChatComponentText("§aTab X offset set: " + TabStatsConfig.getTabXOffset()));
                     } catch (NumberFormatException e) {
                         sender.addChatMessage(new ChatComponentText("§cPlease enter a valid number!"));
@@ -89,7 +89,7 @@ public class TabStatsCommand extends CommandBase {
             case "yoffset": {
                 if (args.length >= 2) {
                     try {
-                        TabStatsConfig.setTabYOffset(Integer.parseInt(args[1]));
+                        TabStatsConfig.setTabYOffset(Float.parseFloat(args[1]));
                         sender.addChatMessage(new ChatComponentText("§aTab Y offset set: " + TabStatsConfig.getTabYOffset()));
                     } catch (NumberFormatException e) {
                         sender.addChatMessage(new ChatComponentText("§cPlease enter a valid number!"));

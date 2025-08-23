@@ -19,9 +19,9 @@ public class TabStatsConfig {
     private static boolean toggleMod = true;
     private static String apiKey = "";
     private static boolean textShadow = true;
-    private static int tabScale = 4;
-    private static int tabXOffset = 0;
-    private static int tabYOffset = 0;
+    private static float tabScale = 4f;
+    private static float tabXOffset = 0f;
+    private static float tabYOffset = 0f;
     private static int tabOpacity = 50;
     private static Color outerTabbgColor = new Color(0,0,0,50);
     private static Color innerTabBgColor = new Color(0,0,0,50);
@@ -40,9 +40,9 @@ public class TabStatsConfig {
                 toggleMod = Boolean.parseBoolean(props.getProperty("toggleMod", String.valueOf(toggleMod)));
                 apiKey = props.getProperty("apiKey", apiKey);
                 textShadow = Boolean.parseBoolean(props.getProperty("textShadow", String.valueOf(textShadow)));
-                tabScale = Integer.parseInt(props.getProperty("tabScale", String.valueOf(tabScale)));
-                tabXOffset = Integer.parseInt(props.getProperty("tabXOffset", String.valueOf(tabXOffset)));
-                tabYOffset = Integer.parseInt(props.getProperty("tabYOffset", String.valueOf(tabYOffset)));
+                tabScale = Float.parseFloat(props.getProperty("tabScale", String.valueOf(tabScale)));
+                tabXOffset = Float.parseFloat(props.getProperty("tabXOffset", String.valueOf(tabXOffset)));
+                tabYOffset = Float.parseFloat(props.getProperty("tabYOffset", String.valueOf(tabYOffset)));
                 tabOpacity = Integer.parseInt(props.getProperty("tabOpacity", String.valueOf(tabOpacity)));
                 outerTabbgColor = new Color(Integer.parseInt(props.getProperty("outerTabBgColor", String.valueOf(outerTabbgColor.getRGB()))), true);
                 innerTabBgColor = new Color(Integer.parseInt(props.getProperty("innerTabBgColor", String.valueOf(innerTabBgColor.getRGB()))), true);
@@ -61,8 +61,8 @@ public class TabStatsConfig {
             props.setProperty("apiKey", apiKey);
             props.setProperty("textShadow", String.valueOf(textShadow));
             props.setProperty("tabScale", String.valueOf(tabScale));
-            props.setProperty("tabXOffset", String.valueOf(tabScale));
-            props.setProperty("tabYOffset", String.valueOf(tabScale));
+            props.setProperty("tabXOffset", String.valueOf(tabXOffset));
+            props.setProperty("tabYOffset", String.valueOf(tabYOffset));
             props.setProperty("tabOpacity", String.valueOf(tabOpacity));
             props.setProperty("outerTabBgColor", String.valueOf(outerTabbgColor.getRGB()));
             props.setProperty("innerTabBgColor", String.valueOf(innerTabBgColor.getRGB()));
@@ -84,13 +84,13 @@ public class TabStatsConfig {
     public static boolean getTextShadow() { return textShadow; }
     public static void setTextShadow(boolean shadow) { textShadow = shadow; save(); }
 
-    public static int getTabScale() { return tabScale; }
-    public static void setTabScale(int scale) { tabScale = scale; save(); }
+    public static float getTabScale() { return tabScale; }
+    public static void setTabScale(float scale) { tabScale = scale; save(); }
 
-    public static int getTabXOffset() { return tabXOffset; }
-    public static void setTabXOffset(int offset) { tabXOffset = offset; save(); }
-    public static int getTabYOffset() { return tabYOffset; }
-    public static void setTabYOffset(int offset) { tabYOffset = offset; save(); }
+    public static float getTabXOffset() { return tabXOffset; }
+    public static void setTabXOffset(float offset) { tabXOffset = offset; save(); }
+    public static float getTabYOffset() { return tabYOffset; }
+    public static void setTabYOffset(float offset) { tabYOffset = offset; save(); }
 
     public static int getTabOpacity() { return tabOpacity; }
     public static void setTabOpacity(int opacity) { tabOpacity = opacity; save(); }

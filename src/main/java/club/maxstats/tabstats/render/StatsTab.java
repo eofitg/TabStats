@@ -72,9 +72,9 @@ public class StatsTab extends GuiPlayerTabOverlay {
         int startingX = scaledRes.getScaledWidth() / 2 - width / 2;
         int startingY = 12;
 
-        final float tabScale = (float) TabStatsConfig.getTabScale() / 4f;
-        final int tabXOffset = TabStatsConfig.getTabXOffset();
-        final int tabYOffset = TabStatsConfig.getTabYOffset();
+        final float tabScale = TabStatsConfig.getTabScale() / 4f;
+        final float tabXOffset = TabStatsConfig.getTabXOffset();
+        final float tabYOffset = TabStatsConfig.getTabYOffset();
         final RGBA outerColor = RGBA.adjustOpacity(TabStatsConfig.getOuterTabBgColor().getRGB(), TabStatsConfig.getTabOpacity());
         final RGBA innerColor = RGBA.adjustOpacity(TabStatsConfig.getInnerTabBgColor().getRGB(), TabStatsConfig.getTabOpacity());
 
