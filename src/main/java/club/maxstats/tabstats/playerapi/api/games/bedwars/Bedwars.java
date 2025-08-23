@@ -10,8 +10,10 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Bedwars extends BedwarsUtil {
+    private static final Logger logger = Logger.getLogger(Bedwars.class.getName());
     private JsonObject bedwarsJson, wholeObject;
     private List<Stat> statList;
     private List<Stat> formattedStatList;
@@ -62,11 +64,11 @@ public class Bedwars extends BedwarsUtil {
             return false;
         } catch (GameNullException ex) {
             if (!this.isNicked) {
-                System.out.println(String.format("Maybe %s has never played %s before", getPlayerName(), game.getGameName()));
+                logger.warning(String.format("Maybe %s has never played %s before", getPlayerName(), game.getGameName()));
             }
 
-            System.out.println("Failed to Set Data");
-            ex.printStackTrace();
+            logger.severe("Failed to set Bedwars data");
+            logger.log(java.util.logging.Level.SEVERE, "Exception while setting data", ex);
             return false;
         }
     }

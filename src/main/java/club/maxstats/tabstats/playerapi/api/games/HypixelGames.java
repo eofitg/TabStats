@@ -11,7 +11,8 @@ public enum HypixelGames {
     DUELS("Duels", "DUELS"),
     PIT("Pit", "PIT");
 
-    private String apiName, gameName;
+    private final String apiName;
+    private final String gameName;
 
     /**
      * @param apiName Name of the Game in Hypixel's API

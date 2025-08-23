@@ -6,8 +6,6 @@ import club.maxstats.tabstats.playerapi.api.stats.StatString;
 import club.maxstats.tabstats.util.ChatColor;
 import org.apache.commons.lang3.text.WordUtils;
 
-import java.util.Locale;
-
 public abstract class DuelsUtil extends HGameBase {
     public DuelsUtil(String playerName, String playerUUID) {
         super(playerName, playerUUID);
@@ -134,22 +132,7 @@ public abstract class DuelsUtil extends HGameBase {
         String formattedTitle = title.replace("_", " ").replace("cosmetictitle", "");
 
         if (this.isPrestigeTitle(title)) {
-            String modeName = title.substring(title.lastIndexOf("_") + 1);
-
-            /* Hypixel being extra difficult and changing the names of their gamemodes only for titles */
-            if (title.contains("no_debuff") || title.contains("mega_walls") || title.contains("tnt_games") || title.contains("all_modes")) {
-                /* probably an easier way of doing this, although I'm lazy ~Max */
-                if (title.contains("no_debuff")) {
-                    modeName = "no_debuff";
-                } else if (title.contains("mega_walls")) {
-                    modeName = "mega_walls";
-                } else if (title.contains("tnt_games")) {
-                    modeName = "tnt_games";
-                } else if (title.contains("all_modes")) {
-                    modeName = "all_modes";
-                }
-            }
-
+            String modeName = getModeName(title);
             DuelsModes duelMode = DuelsModes.valueOf(modeName.toUpperCase());
             String gamemodeName = duelMode.getName();
 
@@ -188,6 +171,25 @@ public abstract class DuelsUtil extends HGameBase {
         }
 
         return WordUtils.capitalize(formattedTitle.trim());
+    }
+
+    private static String getModeName(String title) {
+        String modeName = title.substring(title.lastIndexOf("_") + 1);
+
+        /* Hypixel being extra difficult and changing the names of their gamemodes only for titles */
+        if (title.contains("no_debuff") || title.contains("mega_walls") || title.contains("tnt_games") || title.contains("all_modes")) {
+            /* probably an easier way of doing this, although I'm lazy ~Max */
+            if (title.contains("no_debuff")) {
+                modeName = "no_debuff";
+            } else if (title.contains("mega_walls")) {
+                modeName = "mega_walls";
+            } else if (title.contains("tnt_games")) {
+                modeName = "tnt_games";
+            } else if (title.contains("all_modes")) {
+                modeName = "all_modes";
+            }
+        }
+        return modeName;
     }
 
     private boolean isPrestigeTitle(String title) {

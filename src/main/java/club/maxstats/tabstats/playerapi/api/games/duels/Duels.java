@@ -10,8 +10,10 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Duels extends DuelsUtil {
+    private static final Logger logger = Logger.getLogger(Duels.class.getName());
     public JsonObject duelJson;
     private final JsonObject wholeObject;
     private List<Stat> statList;
@@ -53,11 +55,11 @@ public class Duels extends DuelsUtil {
             return false;
         } catch (GameNullException ex) {
             if (!this.isNicked) {
-                System.out.println(String.format("Maybe %s has never played %s before", getPlayerName(), game.getGameName()));
+                logger.warning(String.format("Maybe %s has never played %s before", getPlayerName(), game.getGameName()));
             }
 
-            System.out.println("Failed to Set Data");
-            ex.printStackTrace();
+            logger.severe("Failed to set Duels data");
+            logger.log(java.util.logging.Level.SEVERE, "Exception while setting Duels data", ex);
             return false;
         }
     }

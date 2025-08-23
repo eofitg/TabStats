@@ -137,20 +137,20 @@ public abstract class BedwarsUtil extends HGameBase {
         int colorAmount;
         String starString = Integer.toString(star);
         if (star < 1000) {
-            return getStarColor(star) + starString + "\u272B";
+            return getStarColor(star) + starString + "✫";
 
         /* prestige stars */
         } else {
             /* if it doesn't meet any requirements, just use normal rainbow colors and star unicode */
             ChatColor[] colors = new ChatColor[]{ChatColor.RED, ChatColor.GOLD, ChatColor.YELLOW, ChatColor.GREEN, ChatColor.AQUA, ChatColor.LIGHT_PURPLE, ChatColor.DARK_PURPLE};
-            String starUnicode = "\u272B";
+            String starUnicode = "✫";
             /* rainbow prestige has 7 colors */
             colorAmount = 7;
 
             /* 1,000-1,999 stars */
             if (star >= 1100) {
                 if (star < 2000) {
-                    starUnicode = "\u272A";
+                    starUnicode = "✪";
                     colorAmount = 5;
                     if (star < 1200) {
                         colors = new ChatColor[]{ChatColor.WHITE, ChatColor.WHITE, ChatColor.WHITE, ChatColor.WHITE, ChatColor.GRAY};
@@ -173,7 +173,7 @@ public abstract class BedwarsUtil extends HGameBase {
                     }
                 /* 2,000+ stars */
                 } else {
-                    starUnicode = "\u269D";
+                    starUnicode = "⚝";
                     colorAmount = 6;
                     if (star < 2100) {
                         colorAmount = 7;

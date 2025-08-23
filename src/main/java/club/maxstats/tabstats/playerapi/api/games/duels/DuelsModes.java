@@ -25,7 +25,15 @@ public enum DuelsModes {
     PARKOUR("Parkour", "parkour", "current_winstreak", "best_overall_winstreak", "wins", "losses", "kills", "deaths");
 
 
-    String name, titleName, wsJson, bestWsJson, winsJson, lossesJson, killsJson, deathsJson;
+    final String name;
+    final String titleName;
+    final String wsJson;
+    final String bestWsJson;
+    final String winsJson;
+    final String lossesJson;
+    final String killsJson;
+    final String deathsJson;
+
     DuelsModes(String name, String titleName, String wsJson, String bestWsJson, String winsJson, String lossesJson, String killsJson, String deathsJson) {
         this.name = name;
         this.titleName = titleName;

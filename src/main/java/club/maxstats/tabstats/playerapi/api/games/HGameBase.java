@@ -14,8 +14,11 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class HGameBase extends HypixelAPI {
+    private static final Logger logger = Logger.getLogger(HGameBase.class.getName());
     private String playerName, playerUUID;
     public boolean isNicked;
     public boolean hasPlayed;
@@ -141,8 +144,8 @@ public abstract class HGameBase extends HypixelAPI {
         int seconds = (int)((System.currentTimeMillis() - this.getLastLogin()) / 1000);
 
         int secondsLeft = seconds % 3600 % 60;
-        int minutes = (int) Math.floor(seconds % 3600 / 60);
-        int hours = (int) Math.floor(seconds / 3600);
+        int minutes = (int) Math.floor((double) (seconds % 3600) / 60);
+        int hours = (int) Math.floor((double) seconds / 3600);
 
         String HH = ChatColor.GREEN.toString() + hours + "h ";
         String MM = minutes + "m ";
@@ -170,7 +173,7 @@ public abstract class HGameBase extends HypixelAPI {
         try {
             d = Double.parseDouble(formattedString);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Failed to parse formatted double", e);
             d = int1;
         }
         return d;
