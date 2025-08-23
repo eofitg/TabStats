@@ -96,8 +96,6 @@ public class Bedwars extends BedwarsUtil {
     /* retrieves the formatted stat list */
     @Override
     public List<Stat> getFormattedStatList() {
-
-
         List<Stat> returnList = new ArrayList<>(this.formattedStatList);
         StatString star = new StatString("STAR");
         star.setValue(this.getStarWithColor(((StatInt)this.star).getValue()));

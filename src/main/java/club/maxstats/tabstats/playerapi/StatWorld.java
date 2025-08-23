@@ -7,15 +7,16 @@ import club.maxstats.tabstats.playerapi.exception.ApiRequestException;
 import club.maxstats.tabstats.playerapi.exception.BadJsonException;
 import club.maxstats.tabstats.playerapi.exception.InvalidKeyException;
 import club.maxstats.tabstats.playerapi.exception.PlayerNullException;
-import club.maxstats.tabstats.util.Handler;
 import club.maxstats.tabstats.util.Multithreading;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Logger;
 
 public class StatWorld {
+    private static final Logger logger = Logger.getLogger(StatWorld.class.getName());
     private final ConcurrentHashMap<UUID, HPlayer> worldPlayers;
     protected final List<UUID> statAssembly = new ArrayList<>();
     protected final List<UUID> existedMoreThan5Seconds = new ArrayList<>();
@@ -83,8 +84,9 @@ public class StatWorld {
                 } catch (PlayerNullException | ApiRequestException | InvalidKeyException | BadJsonException ex) {
                     this.addPlayer(uuid, hPlayer);
                     this.removeFromStatAssembly(uuid);
-                    System.out.println("Could not retrieve player");
-                    ex.printStackTrace();
+
+                    logger.severe("Could not retrieve player");
+                    logger.log(java.util.logging.Level.SEVERE, "Exception while fetching stats", ex);
                     return;
                 }
             }

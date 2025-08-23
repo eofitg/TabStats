@@ -20,27 +20,27 @@ public class WorldLoader extends StatWorld {
     /* populates and checks the stat world player cache every tick */
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        if (this.mc.theWorld != null && this.mc.thePlayer != null) {
-            for (EntityPlayer entityPlayer : this.mc.theWorld.playerEntities) {
-                if (!this.existedMoreThan5Seconds.contains(entityPlayer.getUniqueID())) {
-                    if (!this.timeCheck.containsKey(entityPlayer.getUniqueID()))
-                        this.timeCheck.put(entityPlayer.getUniqueID(), 0);
+        if (this.mc.theWorld == null || this.mc.thePlayer == null) return;
 
-                    int old = this.timeCheck.get(entityPlayer.getUniqueID());
-                    if (old > 100) {
-                        if (!this.existedMoreThan5Seconds.contains(entityPlayer.getUniqueID()))
-                            this.existedMoreThan5Seconds.add(entityPlayer.getUniqueID());
-                    } else {
-                        this.timeCheck.put(entityPlayer.getUniqueID(), old + 1);
-                    }
+        for (EntityPlayer entityPlayer : this.mc.theWorld.playerEntities) {
+            if (!this.existedMoreThan5Seconds.contains(entityPlayer.getUniqueID())) {
+                if (!this.timeCheck.containsKey(entityPlayer.getUniqueID()))
+                    this.timeCheck.put(entityPlayer.getUniqueID(), 0);
+
+                int old = this.timeCheck.get(entityPlayer.getUniqueID());
+                if (old > 100) {
+                    if (!this.existedMoreThan5Seconds.contains(entityPlayer.getUniqueID()))
+                        this.existedMoreThan5Seconds.add(entityPlayer.getUniqueID());
+                } else {
+                    this.timeCheck.put(entityPlayer.getUniqueID(), old + 1);
                 }
-                if (loadOrRender(entityPlayer)) {
-                    final UUID uuid = entityPlayer.getUniqueID();
-                    if (!this.getWorldPlayers().containsKey(entityPlayer.getUniqueID()) && !this.statAssembly.contains(uuid)) {
-                        this.statAssembly.add(uuid);
-                        this.fetchStats(entityPlayer);
-                        this.checkCacheSize();
-                    }
+            }
+            if (loadOrRender(entityPlayer)) {
+                final UUID uuid = entityPlayer.getUniqueID();
+                if (!this.getWorldPlayers().containsKey(entityPlayer.getUniqueID()) && !this.statAssembly.contains(uuid)) {
+                    this.statAssembly.add(uuid);
+                    this.fetchStats(entityPlayer);
+                    this.checkCacheSize();
                 }
             }
         }
@@ -48,21 +48,21 @@ public class WorldLoader extends StatWorld {
 
     public void checkCacheSize() {
         int max = Math.max(150, 500);
-        if (getWorldPlayers().size() > max) {
-            List<UUID> safePlayers = new ArrayList<>();
-            for (EntityPlayer player : mc.theWorld.playerEntities) {
-                if (this.existedMoreThan5Seconds.contains(player.getUniqueID())) {
-                    safePlayers.add(player.getUniqueID());
-                }
+        if (getWorldPlayers().size() <= max) return;
+
+        List<UUID> safePlayers = new ArrayList<>();
+        for (EntityPlayer player : mc.theWorld.playerEntities) {
+            if (this.existedMoreThan5Seconds.contains(player.getUniqueID())) {
+                safePlayers.add(player.getUniqueID());
             }
+        }
 
-            this.existedMoreThan5Seconds.clear();
-            this.existedMoreThan5Seconds.addAll(safePlayers);
+        this.existedMoreThan5Seconds.clear();
+        this.existedMoreThan5Seconds.addAll(safePlayers);
 
-            for (UUID playerUUID : this.getWorldPlayers().keySet()) {
-                if (!safePlayers.contains(playerUUID)) {
-                    this.removePlayer(playerUUID);
-                }
+        for (UUID playerUUID : this.getWorldPlayers().keySet()) {
+            if (!safePlayers.contains(playerUUID)) {
+                this.removePlayer(playerUUID);
             }
         }
     }
