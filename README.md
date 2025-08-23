@@ -14,6 +14,7 @@ A 1.8.9 Hypixel forge mod made for stat checking directly into your tablist!
 /tabstats apikey <value>
 /tabstats shadow
 /tabstats scale <value>
+/tabstats xoffset/yoffset <value>
 /tabstats opacity <value>
 ```
 
