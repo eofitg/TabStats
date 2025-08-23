@@ -13,7 +13,7 @@ import java.util.List;
 public class TabStatsCommand extends CommandBase {
 
     private final List<String> options = Arrays.asList(
-            "toggle", "apikey", "shadow", "scale", "opacity"
+            "toggle", "apikey", "shadow", "scale", "xoffset", "yoffset", "opacity"
     );
 
     @Override
@@ -23,7 +23,7 @@ public class TabStatsCommand extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/tabstats toggle|apikey <value>|shadow|scale <value>|opacity <value>";
+        return "/tabstats toggle|apikey <value>|shadow|scale <value>|xoffset <value|yoffset <value>|opacity <value>";
     }
 
     @Override
@@ -70,6 +70,32 @@ public class TabStatsCommand extends CommandBase {
                     }
                 } else {
                     sender.addChatMessage(new ChatComponentText("§eCurrent tab scale: " + TabStatsConfig.getTabScale()));
+                }
+                break;
+            }
+            case "xoffset": {
+                if (args.length >= 2) {
+                    try {
+                        TabStatsConfig.setTabXOffset(Integer.parseInt(args[1]));
+                        sender.addChatMessage(new ChatComponentText("§aTab X offset set: " + TabStatsConfig.getTabXOffset()));
+                    } catch (NumberFormatException e) {
+                        sender.addChatMessage(new ChatComponentText("§cPlease enter a valid number!"));
+                    }
+                } else {
+                    sender.addChatMessage(new ChatComponentText("§eCurrent tab X offset: " + TabStatsConfig.getTabXOffset()));
+                }
+                break;
+            }
+            case "yoffset": {
+                if (args.length >= 2) {
+                    try {
+                        TabStatsConfig.setTabYOffset(Integer.parseInt(args[1]));
+                        sender.addChatMessage(new ChatComponentText("§aTab Y offset set: " + TabStatsConfig.getTabYOffset()));
+                    } catch (NumberFormatException e) {
+                        sender.addChatMessage(new ChatComponentText("§cPlease enter a valid number!"));
+                    }
+                } else {
+                    sender.addChatMessage(new ChatComponentText("§eCurrent tab Y offset: " + TabStatsConfig.getTabYOffset()));
                 }
                 break;
             }

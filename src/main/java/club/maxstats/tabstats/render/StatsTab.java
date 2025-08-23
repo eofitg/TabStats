@@ -73,11 +73,14 @@ public class StatsTab extends GuiPlayerTabOverlay {
         int startingY = 12;
 
         final float tabScale = (float) TabStatsConfig.getTabScale() / 4f;
+        final int tabXOffset = TabStatsConfig.getTabXOffset();
+        final int tabYOffset = TabStatsConfig.getTabYOffset();
         final RGBA outerColor = RGBA.adjustOpacity(TabStatsConfig.getOuterTabBgColor().getRGB(), TabStatsConfig.getTabOpacity());
         final RGBA innerColor = RGBA.adjustOpacity(TabStatsConfig.getInnerTabBgColor().getRGB(), TabStatsConfig.getTabOpacity());
 
         GlStateManager.pushMatrix();
-        GlStateManager.scale(tabScale, tabScale, tabScale);
+        GlStateManager.scale(tabScale, tabScale, tabScale);  // scale
+        GlStateManager.translate(tabXOffset, tabYOffset, 0);  // position offset
 
         /* this is kind of useless...as nameWidth and objectiveWidth aren't used */
         for (NetworkPlayerInfo playerInfo : playerList) {
@@ -107,9 +110,6 @@ public class StatsTab extends GuiPlayerTabOverlay {
         /* only grabs downwards of 80 players */
         playerList = playerList.subList(0, Math.min(playerList.size(), 80));
         int playerListSize = playerList.size();
-
-        /* TODO Translate to the scaled starting position so that the tab is placed in the same spot with every scaling factor */
-        // GlStateManager.translate();
 
         /* the entire tab background */
         drawRect(startingX - backgroundBorderSize - (objectiveName.isEmpty() ? 0 : 5 + this.mc.fontRendererObj.getStringWidth(objectiveName)), startingY - backgroundBorderSize, (scaledRes.getScaledWidth() / 2 + width / 2) + backgroundBorderSize,  (startingY + (playerListSize + 1) * (entryHeight + 1) - 1) + backgroundBorderSize, outerColor.toRGB());
