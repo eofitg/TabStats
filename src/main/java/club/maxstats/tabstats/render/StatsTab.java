@@ -9,6 +9,7 @@ import club.maxstats.tabstats.playerapi.api.stats.StatInt;
 import club.maxstats.tabstats.playerapi.api.stats.StatString;
 import club.maxstats.tabstats.util.ChatColor;
 import club.maxstats.tabstats.util.RGBA;
+import club.maxstats.tabstats.util.References;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
 import com.mojang.authlib.GameProfile;
@@ -121,14 +122,14 @@ public class StatsTab extends GuiPlayerTabOverlay {
         /* Start with drawing the name and objective, as they will always be here and aren't inside of the Stat List */
         int statXSpacer = startingX + headSize + 2;
         if (TabStatsConfig.getTextShadow()) {
-            this.mc.fontRendererObj.drawStringWithShadow(ChatColor.BOLD + "NAME", statXSpacer, startingY + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB());
+            this.mc.fontRendererObj.drawStringWithShadow(ChatColor.BOLD + References.NAME_TEXT, statXSpacer, startingY + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB());
             this.mc.fontRendererObj.drawStringWithShadow(objectiveName, startingX - (this.mc.fontRendererObj.getStringWidth(objectiveName) + 5), startingY + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB());
         } else {
-            this.mc.fontRendererObj.drawString(ChatColor.BOLD + "NAME", statXSpacer, startingY + (entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
+            this.mc.fontRendererObj.drawString(ChatColor.BOLD + References.NAME_TEXT, statXSpacer, startingY + (entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
             this.mc.fontRendererObj.drawString(objectiveName, startingX - (this.mc.fontRendererObj.getStringWidth(objectiveName) + 5), startingY + (entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
         }
         /* adds longest name possible in pixels to statXSpacer since name's are way longer than stats */
-        statXSpacer += this.mc.fontRendererObj.getStringWidth(ChatColor.BOLD + "[YOUTUBE] WWWWWWWWWWWWWWWW") + 10;
+        statXSpacer += this.mc.fontRendererObj.getStringWidth(ChatColor.BOLD + References.LONGEST_NAME) + 10;
 
         /* loops through all the stats that should be displayed and renders their stat titles */
         for (Stat stat : gameStatTitleList) {
@@ -161,7 +162,7 @@ public class StatsTab extends GuiPlayerTabOverlay {
             if (flag) {
                 /* renders the player's face */
                 EntityPlayer entityPlayer = this.mc.theWorld.getPlayerEntityByUUID(gameProfile.getId());
-                boolean flag1 = entityPlayer != null && entityPlayer.isWearing(EnumPlayerModelParts.CAPE) && (gameProfile.getName().equals("Dinnerbone") || gameProfile.getName().equals("Grumm"));
+                boolean flag1 = entityPlayer != null && entityPlayer.isWearing(EnumPlayerModelParts.CAPE) && References.INVERTED_PLAYER_NAMES.contains(gameProfile.getName());
                 this.mc.getTextureManager().bindTexture(playerInfo.getLocationSkin());
                 int u = 8 + (flag1 ? 8 : 0);
                 int v = 8 * (flag1 ? -1 : 1);
@@ -185,9 +186,9 @@ public class StatsTab extends GuiPlayerTabOverlay {
                     name = name.contains(ChatColor.OBFUSCATE.toString()) ? hPlayer.getPlayerRankColor() + hPlayer.getPlayerName() : this.getHPlayerName(playerInfo, hPlayer);
 
                     /* gets bedwars if the gamemode is not a game added to the hplayer's game list, otherwise, grab the game stats based on the scoreboard */
-                    List<Stat> statList = hPlayer.getFormattedGameStats(gamemode) == null ? hPlayer.getFormattedGameStats("BEDWARS") : hPlayer.getFormattedGameStats(gamemode);
+                    List<Stat> statList = hPlayer.getFormattedGameStats(gamemode) == null ? hPlayer.getFormattedGameStats(References.DEFAULT_GAMEMODE) : hPlayer.getFormattedGameStats(gamemode);
                     /* start at the first stat */
-                    int valueXSpacer = startingX + this.mc.fontRendererObj.getStringWidth(ChatColor.BOLD + "[YOUTUBE] WWWWWWWWWWWWWWWW") + 10 + headSize + 2;
+                    int valueXSpacer = startingX + this.mc.fontRendererObj.getStringWidth(ChatColor.BOLD + References.LONGEST_NAME) + 10 + headSize + 2;
 
                     for (Stat stat : statList) {
                         String statValue = "";
@@ -318,9 +319,9 @@ public class StatsTab extends GuiPlayerTabOverlay {
         }
 
         public int compare(NetworkPlayerInfo p_compare_1_, NetworkPlayerInfo p_compare_2_) {
-            ScorePlayerTeam scoreplayerteam = p_compare_1_.getPlayerTeam();
-            ScorePlayerTeam scoreplayerteam1 = p_compare_2_.getPlayerTeam();
-            return ComparisonChain.start().compareTrueFirst(p_compare_1_.getGameType() != WorldSettings.GameType.SPECTATOR, p_compare_2_.getGameType() != WorldSettings.GameType.SPECTATOR).compare(scoreplayerteam != null ? scoreplayerteam.getRegisteredName() : "", scoreplayerteam1 != null ? scoreplayerteam1.getRegisteredName() : "").compare(p_compare_1_.getGameProfile().getName(), p_compare_2_.getGameProfile().getName()).result();
+            ScorePlayerTeam compare_1_playerTeam = p_compare_1_.getPlayerTeam();
+            ScorePlayerTeam compare_2_playerTeam = p_compare_2_.getPlayerTeam();
+            return ComparisonChain.start().compareTrueFirst(p_compare_1_.getGameType() != WorldSettings.GameType.SPECTATOR, p_compare_2_.getGameType() != WorldSettings.GameType.SPECTATOR).compare(compare_1_playerTeam != null ? compare_1_playerTeam.getRegisteredName() : "", compare_2_playerTeam != null ? compare_2_playerTeam.getRegisteredName() : "").compare(p_compare_1_.getGameProfile().getName(), p_compare_2_.getGameProfile().getName()).result();
         }
     }
 
