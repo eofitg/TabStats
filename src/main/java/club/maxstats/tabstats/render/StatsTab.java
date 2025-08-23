@@ -78,9 +78,11 @@ public class StatsTab extends GuiPlayerTabOverlay {
         final RGBA outerColor = RGBA.adjustOpacity(TabStatsConfig.getOuterTabBgColor().getRGB(), TabStatsConfig.getTabOpacity());
         final RGBA innerColor = RGBA.adjustOpacity(TabStatsConfig.getInnerTabBgColor().getRGB(), TabStatsConfig.getTabOpacity());
 
+        final float centerX = scaledRes.getScaledWidth() / 2f;
         GlStateManager.pushMatrix();
-        GlStateManager.scale(tabScale, tabScale, tabScale);  // scale
-        GlStateManager.translate(tabXOffset, tabYOffset, 0);  // position offset
+        GlStateManager.translate(centerX, 0, 0);
+        GlStateManager.scale(tabScale, tabScale, 1);  // scale
+        GlStateManager.translate(-centerX + tabXOffset, tabYOffset, 0);  // position offset
 
         /* this is kind of useless...as nameWidth and objectiveWidth aren't used */
         for (NetworkPlayerInfo playerInfo : playerList) {
