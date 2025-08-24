@@ -26,4 +26,15 @@ public enum HypixelGames {
     public String getApiName() { return this.apiName; }
 
     public String getGameName() { return this.gameName; }
+
+    public static boolean gameNameContains(String name)
+    {
+        if (name == null) return false;
+        for (HypixelGames game : values()) {
+            if (game.gameName.equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

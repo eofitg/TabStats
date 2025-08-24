@@ -3,6 +3,7 @@ package club.maxstats.tabstats.listener;
 import club.maxstats.tabstats.TabStats;
 import club.maxstats.tabstats.config.TabStatsConfig;
 import club.maxstats.tabstats.playerapi.HPlayer;
+import club.maxstats.tabstats.playerapi.api.games.HypixelGames;
 import club.maxstats.tabstats.playerapi.api.stats.Stat;
 import club.maxstats.tabstats.render.StatsTab;
 import club.maxstats.tabstats.util.ChatColor;
@@ -38,7 +39,10 @@ public class GameOverlayListener {
         String gamemode = References.DEFAULT_GAMEMODE;
         ScoreObjective scoreboardTitle = scoreboard.getObjectiveInDisplaySlot(1);
         if (scoreboardTitle != null) {
-            gamemode = ChatColor.stripColor(scoreboardTitle.getDisplayName()).replace(" ", "");
+            String gameFromScoreboard = ChatColor.stripColor(scoreboardTitle.getDisplayName()).replace(" ", "");
+            if (HypixelGames.gameNameContains(gameFromScoreboard)) {
+                gamemode = gameFromScoreboard;
+            }
         }
 
         /* your HPlayer object */
