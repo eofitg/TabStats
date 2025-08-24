@@ -3,6 +3,7 @@ package club.maxstats.tabstats;
 import club.maxstats.tabstats.config.TabStatsConfig;
 import club.maxstats.tabstats.command.TabStatsCommand;
 import club.maxstats.tabstats.listener.GameOverlayListener;
+import club.maxstats.tabstats.listener.JoinWorldListener;
 import club.maxstats.tabstats.playerapi.WorldLoader;
 import club.maxstats.tabstats.util.References;
 import net.minecraft.command.ICommand;
@@ -40,7 +41,7 @@ public class TabStats {
     public void init(FMLInitializationEvent event) {
         this.config = new TabStatsConfig();
         this.statWorld = new WorldLoader();
-        this.registerListeners(this.statWorld, new GameOverlayListener());
+        this.registerListeners(this.statWorld, new GameOverlayListener(), new JoinWorldListener());
         this.registerCommands(new TabStatsCommand());
     }
 
