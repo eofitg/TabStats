@@ -64,7 +64,7 @@ public class HypixelAPI {
                 else if (obj.get("success").getAsString().equals("false"))
                     throw new ApiRequestException();
             } catch (IOException ex) {
-                logger.log(Level.SEVERE, "Error with setGameData", ex);
+                logger.warning("Failed to fetch player data for UUID " + uuid);
             }
         }
 

@@ -57,9 +57,7 @@ public class Duels extends DuelsUtil {
             if (!this.isNicked) {
                 logger.warning(String.format("Maybe %s has never played %s before", getPlayerName(), game.getGameName()));
             }
-
-            logger.severe("Failed to set Duels data");
-            logger.log(java.util.logging.Level.SEVERE, "Exception while setting Duels data", ex);
+            logger.warning("Failed to set " + game.getGameName() + " data for " + getPlayerName());
             return false;
         }
     }

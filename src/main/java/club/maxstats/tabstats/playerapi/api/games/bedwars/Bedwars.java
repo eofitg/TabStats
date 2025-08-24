@@ -66,9 +66,7 @@ public class Bedwars extends BedwarsUtil {
             if (!this.isNicked) {
                 logger.warning(String.format("Maybe %s has never played %s before", getPlayerName(), game.getGameName()));
             }
-
-            logger.severe("Failed to set Bedwars data");
-            logger.log(java.util.logging.Level.SEVERE, "Exception while setting data", ex);
+            logger.warning("Failed to set " + game.getGameName() + " data for " + getPlayerName());
             return false;
         }
     }
