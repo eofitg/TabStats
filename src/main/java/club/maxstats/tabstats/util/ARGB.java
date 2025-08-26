@@ -90,12 +90,12 @@ public class ARGB {
         hex = hex.trim();
         if (hex.startsWith("0x") || hex.startsWith("0X")) {
             hex = hex.substring(2);
-        } else if (hex.startsWith("#")) {
-            hex = hex.substring(1);
         }
 
         int color;
-        if (hex.length() == 8) {
+        if (hex.length() == 6) {
+            color = (int) Long.parseLong("FF" + hex, 16);
+        } else if (hex.length() == 8) {
             color = (int) Long.parseLong(hex, 16);
         } else {
             throw new NumberFormatException();

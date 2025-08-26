@@ -1,6 +1,7 @@
 package club.maxstats.tabstats.command;
 
 import club.maxstats.tabstats.config.TabStatsConfig;
+import club.maxstats.tabstats.util.ARGB;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
@@ -13,7 +14,8 @@ import java.util.List;
 public class TabStatsCommand extends CommandBase {
 
     private final List<String> options = Arrays.asList(
-            "toggle", "apikey", "shadow", "scale", "xoffset", "yoffset", "opacity"
+            "toggle", "apikey", "shadow", "scale", "xoffset", "yoffset",
+            "opacity",  "outercolor", "innercolor"
     );
 
     @Override
@@ -23,7 +25,7 @@ public class TabStatsCommand extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/tabstats toggle|apikey <value>|shadow|scale <value>|xoffset <value|yoffset <value>|opacity <value>";
+        return "/tabstats toggle|apikey <value>|shadow|scale <value>|xoffset <value|yoffset <value>|opacity <value>|outercolor <value>|innercolor <value>";
     }
 
     @Override
@@ -109,6 +111,34 @@ public class TabStatsCommand extends CommandBase {
                     }
                 } else {
                     sender.addChatMessage(new ChatComponentText("§eCurrent tab opacity: " + TabStatsConfig.getTabOpacity()));
+                }
+                break;
+            }
+            case "outercolor": {
+                if (args.length >= 2) {
+                    try {
+                        ARGB test = ARGB.fromHex(args[1]);
+                        TabStatsConfig.setOuterTabBgColor(test.toHexString());
+                        sender.addChatMessage(new ChatComponentText("§aTab outer background color set: " + TabStatsConfig.getOuterTabBgColor()));
+                    } catch (NumberFormatException e) {
+                        sender.addChatMessage(new ChatComponentText("§cPlease enter a valid hexadecimal RGB number (e.g., FF0000, 0x000000)!"));
+                    }
+                } else {
+                    sender.addChatMessage(new ChatComponentText("§eCurrent tab outer background color: " + TabStatsConfig.getOuterTabBgColor()));
+                }
+                break;
+            }
+            case "innercolor": {
+                if (args.length >= 2) {
+                    try {
+                        ARGB test = ARGB.fromHex(args[1]);
+                        TabStatsConfig.setInnerTabBgColor(test.toHexString());
+                        sender.addChatMessage(new ChatComponentText("§aTab inner background color set: " + TabStatsConfig.getInnerTabBgColor()));
+                    } catch (NumberFormatException e) {
+                        sender.addChatMessage(new ChatComponentText("§cPlease enter a valid hexadecimal RGB number (e.g., FF0000, 0x000000)!"));
+                    }
+                } else {
+                    sender.addChatMessage(new ChatComponentText("§eCurrent tab inner background color: " + TabStatsConfig.getInnerTabBgColor()));
                 }
                 break;
             }

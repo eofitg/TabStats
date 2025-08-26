@@ -23,8 +23,8 @@ public class TabStatsConfig {
     private static float tabXOffset = 0f;
     private static float tabYOffset = 0f;
     private static int tabOpacity = 50;
-    private static Color outerTabbgColor = new Color(0,0,0);
-    private static Color innerTabBgColor = new Color(0,0,0);
+    private static String outerTabBgColor = "0x000000";
+    private static String innerTabBgColor = "0x000000";
 
     // ================= Constructor =================
     public TabStatsConfig() {
@@ -44,8 +44,8 @@ public class TabStatsConfig {
                 tabXOffset = Float.parseFloat(props.getProperty("tabXOffset", String.valueOf(tabXOffset)));
                 tabYOffset = Float.parseFloat(props.getProperty("tabYOffset", String.valueOf(tabYOffset)));
                 tabOpacity = Integer.parseInt(props.getProperty("tabOpacity", String.valueOf(tabOpacity)));
-                outerTabbgColor = new Color(Integer.parseInt(props.getProperty("outerTabBgColor", String.valueOf(outerTabbgColor.getRGB()))), false);
-                innerTabBgColor = new Color(Integer.parseInt(props.getProperty("innerTabBgColor", String.valueOf(innerTabBgColor.getRGB()))), false);
+                outerTabBgColor = props.getProperty("outerTabBgColor", outerTabBgColor);
+                innerTabBgColor = props.getProperty("innerTabBgColor", innerTabBgColor);
             } else {
                 save();
             }
@@ -64,8 +64,8 @@ public class TabStatsConfig {
             props.setProperty("tabXOffset", String.valueOf(tabXOffset));
             props.setProperty("tabYOffset", String.valueOf(tabYOffset));
             props.setProperty("tabOpacity", String.valueOf(tabOpacity));
-            props.setProperty("outerTabBgColor", String.valueOf(outerTabbgColor.getRGB()));
-            props.setProperty("innerTabBgColor", String.valueOf(innerTabBgColor.getRGB()));
+            props.setProperty("outerTabBgColor", outerTabBgColor);
+            props.setProperty("innerTabBgColor", innerTabBgColor);
 
             if (!configFile.getParentFile().exists()) configFile.getParentFile().mkdirs();
             props.store(new FileWriter(configFile), References.MOD_NAME + " Config");
@@ -95,9 +95,9 @@ public class TabStatsConfig {
     public static int getTabOpacity() { return tabOpacity; }
     public static void setTabOpacity(int opacity) { tabOpacity = opacity; save(); }
 
-    public static Color getOuterTabBgColor() { return outerTabbgColor; }
-    public static void setOuterTabBgColor(Color color) { outerTabbgColor = color; save(); }
+    public static String getOuterTabBgColor() { return outerTabBgColor; }
+    public static void setOuterTabBgColor(String color) { outerTabBgColor = color; save(); }
 
-    public static Color getInnerTabBgColor() { return innerTabBgColor; }
-    public static void setInnerTabBgColor(Color color) { innerTabBgColor = color; save(); }
+    public static String getInnerTabBgColor() { return innerTabBgColor; }
+    public static void setInnerTabBgColor(String color) { innerTabBgColor = color; save(); }
 }
