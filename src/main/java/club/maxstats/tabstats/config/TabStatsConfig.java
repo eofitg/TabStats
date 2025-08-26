@@ -23,8 +23,8 @@ public class TabStatsConfig {
     private static float tabXOffset = 0f;
     private static float tabYOffset = 0f;
     private static int tabOpacity = 50;
-    private static Color outerTabbgColor = new Color(0,0,0,50);
-    private static Color innerTabBgColor = new Color(0,0,0,50);
+    private static Color outerTabbgColor = new Color(0,0,0);
+    private static Color innerTabBgColor = new Color(0,0,0);
 
     // ================= Constructor =================
     public TabStatsConfig() {
