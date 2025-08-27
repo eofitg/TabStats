@@ -1,6 +1,6 @@
 package club.maxstats.tabstats.listener;
 
-import club.maxstats.tabstats.util.ApiKeyUtil;
+import club.maxstats.tabstats.util.ApiKey;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -23,7 +23,7 @@ public class JoinWorldListener {
         String worldId = getWorldIdentifier(event.world);
         if (!checkedWorlds.contains(worldId)) {
             checkedWorlds.add(worldId);
-            ApiKeyUtil.checkApiKeyAndNotify(mc);
+            ApiKey.checkApiKeyAndNotify(mc);
         }
     }
 

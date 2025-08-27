@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
-public class ApiKeyUtil {
+public class ApiKey {
     public static void checkApiKeyAndNotify(Minecraft mc) {
         if (mc == null || mc.thePlayer == null) return;
         EntityPlayer player = mc.thePlayer;
