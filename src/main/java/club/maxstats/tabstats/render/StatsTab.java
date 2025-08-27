@@ -76,8 +76,8 @@ public class StatsTab extends GuiPlayerTabOverlay {
         final float tabScale = TabStatsConfig.getTabScale() / 4f;
         final float tabXOffset = TabStatsConfig.getTabXOffset();
         final float tabYOffset = TabStatsConfig.getTabYOffset();
-        final ARGB outerColor = ARGB.fromHex(TabStatsConfig.getOuterTabBgColor());
-        final ARGB innerColor = ARGB.fromHex(TabStatsConfig.getInnerTabBgColor());
+        final int outerColor = ARGB.fromHex(TabStatsConfig.getOuterTabBgColor());
+        final int innerColor = ARGB.fromHex(TabStatsConfig.getInnerTabBgColor());
 
         final float centerX = scaledRes.getScaledWidth() / 2f;
         GlStateManager.pushMatrix();
@@ -115,9 +115,9 @@ public class StatsTab extends GuiPlayerTabOverlay {
         int playerListSize = playerList.size();
 
         /* the entire tab background */
-        drawRect(startingX - backgroundBorderSize - (objectiveName.isEmpty() ? 0 : 5 + this.mc.fontRendererObj.getStringWidth(objectiveName)), startingY - backgroundBorderSize, (scaledRes.getScaledWidth() / 2 + width / 2) + backgroundBorderSize,  (startingY + (playerListSize + 1) * (entryHeight + 1) - 1) + backgroundBorderSize, outerColor.toARGB());
+        drawRect(startingX - backgroundBorderSize - (objectiveName.isEmpty() ? 0 : 5 + this.mc.fontRendererObj.getStringWidth(objectiveName)), startingY - backgroundBorderSize, (scaledRes.getScaledWidth() / 2 + width / 2) + backgroundBorderSize,  (startingY + (playerListSize + 1) * (entryHeight + 1) - 1) + backgroundBorderSize, outerColor);
         /* draw an entry rect for the stat name title */
-        drawRect(startingX, startingY, scaledRes.getScaledWidth() / 2 + width / 2, startingY + entryHeight, innerColor.toARGB());
+        drawRect(startingX, startingY, scaledRes.getScaledWidth() / 2 + width / 2, startingY + entryHeight, innerColor);
 
         /* Start with drawing the name and objective, as they will always be here and aren't inside of the Stat List */
         int statXSpacer = startingX + headSize + 2;
@@ -147,7 +147,7 @@ public class StatsTab extends GuiPlayerTabOverlay {
         for (NetworkPlayerInfo playerInfo : playerList) {
             int xSpacer = startingX;
             /* entry background */
-            drawRect(xSpacer, ySpacer, scaledRes.getScaledWidth() / 2 + width / 2, ySpacer + entryHeight, innerColor.toARGB());
+            drawRect(xSpacer, ySpacer, scaledRes.getScaledWidth() / 2 + width / 2, ySpacer + entryHeight, innerColor);
 
             /* ignore this, this is just preparing the gl canvas for rendering */
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
