@@ -34,6 +34,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.text.WordUtils;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -185,8 +186,8 @@ public class StatsTab extends GuiPlayerTabOverlay {
                     /* render tabstats here */
                     name = name.contains(ChatColor.OBFUSCATE.toString()) ? hPlayer.getPlayerRankColor() + hPlayer.getPlayerName() : this.getHPlayerName(playerInfo, hPlayer);
 
-                    /* gets bedwars if the gamemode is not a game added to the hplayer's game list, otherwise, grab the game stats based on the scoreboard */
-                    List<Stat> statList = hPlayer.getFormattedGameStats(gamemode) == null ? hPlayer.getFormattedGameStats(References.DEFAULT_GAMEMODE) : hPlayer.getFormattedGameStats(gamemode);
+                    /* gets empty Array if the gamemode is not a game added to the hplayer's game list, otherwise, grab the game stats based on the scoreboard */
+                    List<Stat> statList = hPlayer.getFormattedGameStats(gamemode) == null ? new ArrayList<>() : hPlayer.getFormattedGameStats(gamemode);
                     /* start at the first stat */
                     int valueXSpacer = startingX + this.mc.fontRendererObj.getStringWidth(ChatColor.BOLD + References.LONGEST_NAME) + 10 + headSize + 2;
 

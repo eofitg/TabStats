@@ -36,7 +36,7 @@ public class GameOverlayListener {
         /* scoreboard.getObjectiveInDisplaySlot(0) gets the main score objective */
         /* this is where we render our new tab */
         /* Sets gamemode based off the name of the scoreboard */
-        String gamemode = References.DEFAULT_GAMEMODE;
+        String gamemode = References.NULL;
         ScoreObjective scoreboardTitle = scoreboard.getObjectiveInDisplaySlot(1);
         if (scoreboardTitle != null) {
             String gameFromScoreboard = ChatColor.stripColor(scoreboardTitle.getDisplayName()).replace(" ", "");
@@ -49,7 +49,7 @@ public class GameOverlayListener {
         HPlayer theHPlayer = TabStats.getTabStats().getStatWorld().getPlayerByUUID(Minecraft.getMinecraft().thePlayer.getUniqueID());
 
         List<Stat> gameStatTitleList = new ArrayList<>();
-        if (theHPlayer != null) {
+        if (theHPlayer != null && !gamemode.equals(References.NULL)) {
             gameStatTitleList = theHPlayer.getFormattedGameStats(gamemode);
         }
 

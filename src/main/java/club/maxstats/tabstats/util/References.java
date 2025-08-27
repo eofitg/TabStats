@@ -8,8 +8,8 @@ public interface References {
     String MOD_NAME = "@NAME@";
     String MOD_ID = "@ID@";
     String VERSION = "@VER@";
+    String NULL = "@NULL@";
 
-    String DEFAULT_GAMEMODE = "BEDWARS";
     String NAME_TEXT = "NAME";
     String LONGEST_NAME = "[YOUTUBE] WWWWWWWWWWWWWWWW";
     List<String> INVERTED_PLAYER_NAMES = Arrays.asList(
