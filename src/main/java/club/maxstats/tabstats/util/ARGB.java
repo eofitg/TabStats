@@ -72,10 +72,6 @@ public class ARGB {
         return new ARGB(this.red, this.green, this.blue, this.opacity);
     }
 
-    public static ARGB adjustOpacity(int color, int opacity) {
-        return new ARGB(getRed(color), getGreen(color), getBlue(color), opacity);
-    }
-
     public static int getRed(int color) { return color >> 16 & 0xFF; }
 
     public static int getGreen(int color) { return color >> 8 & 0xFF; }
@@ -93,9 +89,7 @@ public class ARGB {
         }
 
         int color;
-        if (hex.length() == 6) {
-            color = (int) Long.parseLong("FF" + hex, 16);
-        } else if (hex.length() == 8) {
+        if (hex.length() == 8) {
             color = (int) Long.parseLong(hex, 16);
         } else {
             throw new NumberFormatException();

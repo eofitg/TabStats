@@ -15,7 +15,7 @@ public class TabStatsCommand extends CommandBase {
 
     private final List<String> options = Arrays.asList(
             "toggle", "apikey", "shadow", "scale", "xoffset", "yoffset",
-            "opacity",  "outercolor", "innercolor"
+            "outercolor", "innercolor"
     );
 
     @Override
@@ -25,7 +25,7 @@ public class TabStatsCommand extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/tabstats toggle|apikey <value>|shadow|scale <value>|xoffset <value|yoffset <value>|opacity <value>|outercolor <value>|innercolor <value>";
+        return "/tabstats toggle|apikey <value>|shadow|scale <value>|xoffset <value|yoffset <value>|outercolor <value>|innercolor <value>";
     }
 
     @Override
@@ -101,27 +101,14 @@ public class TabStatsCommand extends CommandBase {
                 }
                 break;
             }
-            case "opacity": {
-                if (args.length >= 2) {
-                    try {
-                        TabStatsConfig.setTabOpacity(Integer.parseInt(args[1]));
-                        sender.addChatMessage(new ChatComponentText("§aTab opacity set: " + TabStatsConfig.getTabOpacity()));
-                    } catch (NumberFormatException e) {
-                        sender.addChatMessage(new ChatComponentText("§cPlease enter a valid number!"));
-                    }
-                } else {
-                    sender.addChatMessage(new ChatComponentText("§eCurrent tab opacity: " + TabStatsConfig.getTabOpacity()));
-                }
-                break;
-            }
             case "outercolor": {
                 if (args.length >= 2) {
                     try {
-                        ARGB test = ARGB.fromHex(args[1]);
-                        TabStatsConfig.setOuterTabBgColor(test.toHexString());
+                        ARGB check = ARGB.fromHex(args[1]);
+                        TabStatsConfig.setOuterTabBgColor(check.toHexString());
                         sender.addChatMessage(new ChatComponentText("§aTab outer background color set: " + TabStatsConfig.getOuterTabBgColor()));
                     } catch (NumberFormatException e) {
-                        sender.addChatMessage(new ChatComponentText("§cPlease enter a valid hexadecimal RGB number (e.g., FF0000, 0x000000)!"));
+                        sender.addChatMessage(new ChatComponentText("§cPlease enter a valid hexadecimal ARGB number (e.g., FFff0000, 0x7F000000)!"));
                     }
                 } else {
                     sender.addChatMessage(new ChatComponentText("§eCurrent tab outer background color: " + TabStatsConfig.getOuterTabBgColor()));
@@ -131,11 +118,11 @@ public class TabStatsCommand extends CommandBase {
             case "innercolor": {
                 if (args.length >= 2) {
                     try {
-                        ARGB test = ARGB.fromHex(args[1]);
-                        TabStatsConfig.setInnerTabBgColor(test.toHexString());
+                        ARGB check = ARGB.fromHex(args[1]);
+                        TabStatsConfig.setInnerTabBgColor(check.toHexString());
                         sender.addChatMessage(new ChatComponentText("§aTab inner background color set: " + TabStatsConfig.getInnerTabBgColor()));
                     } catch (NumberFormatException e) {
-                        sender.addChatMessage(new ChatComponentText("§cPlease enter a valid hexadecimal RGB number (e.g., FF0000, 0x000000)!"));
+                        sender.addChatMessage(new ChatComponentText("§cPlease enter a valid hexadecimal ARGB number (e.g., FFff0000, 0x7F000000)!"));
                     }
                 } else {
                     sender.addChatMessage(new ChatComponentText("§eCurrent tab inner background color: " + TabStatsConfig.getInnerTabBgColor()));

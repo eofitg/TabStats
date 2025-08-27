@@ -22,9 +22,8 @@ public class TabStatsConfig {
     private static float tabScale = 4f;
     private static float tabXOffset = 0f;
     private static float tabYOffset = 0f;
-    private static int tabOpacity = 50;
-    private static String outerTabBgColor = "0x000000";
-    private static String innerTabBgColor = "0x000000";
+    private static String outerTabBgColor = "0x7F000000";
+    private static String innerTabBgColor = "0x7F000000";
 
     // ================= Constructor =================
     public TabStatsConfig() {
@@ -43,7 +42,6 @@ public class TabStatsConfig {
                 tabScale = Float.parseFloat(props.getProperty("tabScale", String.valueOf(tabScale)));
                 tabXOffset = Float.parseFloat(props.getProperty("tabXOffset", String.valueOf(tabXOffset)));
                 tabYOffset = Float.parseFloat(props.getProperty("tabYOffset", String.valueOf(tabYOffset)));
-                tabOpacity = Integer.parseInt(props.getProperty("tabOpacity", String.valueOf(tabOpacity)));
                 outerTabBgColor = props.getProperty("outerTabBgColor", outerTabBgColor);
                 innerTabBgColor = props.getProperty("innerTabBgColor", innerTabBgColor);
             } else {
@@ -63,7 +61,6 @@ public class TabStatsConfig {
             props.setProperty("tabScale", String.valueOf(tabScale));
             props.setProperty("tabXOffset", String.valueOf(tabXOffset));
             props.setProperty("tabYOffset", String.valueOf(tabYOffset));
-            props.setProperty("tabOpacity", String.valueOf(tabOpacity));
             props.setProperty("outerTabBgColor", outerTabBgColor);
             props.setProperty("innerTabBgColor", innerTabBgColor);
 
@@ -91,9 +88,6 @@ public class TabStatsConfig {
     public static void setTabXOffset(float offset) { tabXOffset = offset; save(); }
     public static float getTabYOffset() { return tabYOffset; }
     public static void setTabYOffset(float offset) { tabYOffset = offset; save(); }
-
-    public static int getTabOpacity() { return tabOpacity; }
-    public static void setTabOpacity(int opacity) { tabOpacity = opacity; save(); }
 
     public static String getOuterTabBgColor() { return outerTabBgColor; }
     public static void setOuterTabBgColor(String color) { outerTabBgColor = color; save(); }
