@@ -2,7 +2,6 @@ package club.maxstats.tabstats.config;
 
 import club.maxstats.tabstats.util.References;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

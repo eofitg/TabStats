@@ -298,18 +298,15 @@ public class StatsTab extends GuiPlayerTabOverlay {
                     int i1 = (int)((1.0F - f1) * 255.0F) << 16 | (int)(f1 * 255.0F) << 8;
                     String s = "" + (float)i / 2.0F;
 
-                    if (endX - this.mc.fontRendererObj.getStringWidth(s + "hp") >= startX) {
+                    if (endX - this.mc.fontRendererObj.getStringWidth(s + "hp") >= startX)
                         s = s + "hp";
-                    }
-                        this.mc.fontRendererObj.drawStringWithShadow(s, (float)((endX + startX) / 2 - this.mc.fontRendererObj.getStringWidth(s) / 2), (float)y, i1);
+                    this.mc.fontRendererObj.drawStringWithShadow(s, (float)((endX + startX) / 2 - this.mc.fontRendererObj.getStringWidth(s) / 2), (float)y, i1);
                 }
             }
         } else {
             /* This is where Hypixel usually has Client draw Scoreboard Stats */
-
             String s1 = EnumChatFormatting.YELLOW + "" + i;
-                this.mc.fontRendererObj.drawStringWithShadow(s1, (float)(endX - this.mc.fontRendererObj.getStringWidth(s1)), (float)y + (entryHeight / 2f - 4), 16777215);
-//            drawRect(endX - this.mc.fontRendererObj.getStringWidth(objectiveIn.getDisplayName()), y, endX, y + this.entryHeight, 553648127);
+            this.mc.fontRendererObj.drawStringWithShadow(s1, (float)(endX - this.mc.fontRendererObj.getStringWidth(s1)), (float)y + (entryHeight / 2f - 4), 16777215);
         }
     }
 
