@@ -126,8 +126,8 @@ public class StatsTab extends GuiPlayerTabOverlay {
             this.mc.fontRendererObj.drawStringWithShadow(ChatColor.BOLD + References.NAME_TEXT, statXSpacer, startingY + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB());
             this.mc.fontRendererObj.drawStringWithShadow(objectiveName, startingX - (this.mc.fontRendererObj.getStringWidth(objectiveName) + 5), startingY + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB());
         } else {
-            this.mc.fontRendererObj.drawString(ChatColor.BOLD + References.NAME_TEXT, statXSpacer, startingY + (entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
-            this.mc.fontRendererObj.drawString(objectiveName, startingX - (this.mc.fontRendererObj.getStringWidth(objectiveName) + 5), startingY + (entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
+            this.mc.fontRendererObj.drawString(ChatColor.BOLD + References.NAME_TEXT, statXSpacer, startingY + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB(), false);
+            this.mc.fontRendererObj.drawString(objectiveName, startingX - (this.mc.fontRendererObj.getStringWidth(objectiveName) + 5), startingY + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB(), false);
         }
         /* adds longest name possible in pixels to statXSpacer since name's are way longer than stats */
         statXSpacer += this.mc.fontRendererObj.getStringWidth(ChatColor.BOLD + References.LONGEST_NAME) + 10;
@@ -138,7 +138,7 @@ public class StatsTab extends GuiPlayerTabOverlay {
             if (TabStatsConfig.getTextShadow())
                 this.mc.fontRendererObj.drawStringWithShadow(ChatColor.BOLD + statName, statXSpacer, startingY + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB());
             else
-                this.mc.fontRendererObj.drawString(ChatColor.BOLD + statName, statXSpacer, startingY + (entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
+                this.mc.fontRendererObj.drawString(ChatColor.BOLD + statName, statXSpacer, startingY + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB(), false);
             /* adds spacer for next stat */
             statXSpacer += this.mc.fontRendererObj.getStringWidth(ChatColor.BOLD + statName) + 10;
         }
@@ -211,16 +211,16 @@ public class StatsTab extends GuiPlayerTabOverlay {
                         if (TabStatsConfig.getTextShadow())
                             this.mc.fontRendererObj.drawStringWithShadow(statValue, valueXSpacer, ySpacer + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB());
                         else
-                            this.mc.fontRendererObj.drawString(statValue, valueXSpacer, ySpacer + (entryHeight / 2 - 4), ChatColor.WHITE.getRGB());
+                            this.mc.fontRendererObj.drawString(statValue, valueXSpacer, ySpacer + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB(), false);
                         valueXSpacer += this.mc.fontRendererObj.getStringWidth(ChatColor.BOLD + stat.getStatName()) + 10;
                     }
                 }
 
                 // draws the players name
                 if (TabStatsConfig.getTextShadow())
-                    this.mc.fontRendererObj.drawStringWithShadow(name, xSpacer, ySpacer + (entryHeight / 2f - 4), -1);
+                    this.mc.fontRendererObj.drawStringWithShadow(name, xSpacer, ySpacer + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB());
                 else
-                    this.mc.fontRendererObj.drawString(name, xSpacer, ySpacer + (entryHeight / 2 - 4), -1);
+                    this.mc.fontRendererObj.drawString(name, xSpacer, ySpacer + (entryHeight / 2f - 4), ChatColor.WHITE.getRGB(), false);
             }
 
             if (scoreObjectiveIn != null & playerInfo.getGameType() != WorldSettings.GameType.SPECTATOR) {
