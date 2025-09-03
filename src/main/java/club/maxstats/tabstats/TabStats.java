@@ -18,14 +18,6 @@ import java.util.Arrays;
 
 @Mod(modid = References.MOD_ID, name = References.MOD_NAME, clientSideOnly = true, version = References.VERSION, acceptedMinecraftVersions = "1.8.9", acceptableRemoteVersions = "*" )
 public class TabStats {
-    
-    /* TODO: (- not done, o done)
-    o Add: Working background color picker.
-    - Fix: Header and footer issues.
-    o Add: Text shadow boolean.
-    o Add: Adjust with bossbar boolean.
-    */
-    
     private static TabStats tabStats;
     private WorldLoader statWorld;
     private TabStatsConfig config;
