@@ -24,13 +24,7 @@ public class TabStatsConfig {
     private static String outerTabBgColor = "0x7F000000";
     private static String innerTabBgColor = "0x7F000000";
 
-    // ================= Constructor =================
-    public TabStatsConfig() {
-        load();
-    }
-
-    // ================= Load/Save =================
-    private void load() {
+    public static void load() {
         try {
             if (configFile.exists()) {
                 props.load(java.nio.file.Files.newBufferedReader(configFile.toPath()));
