@@ -1,6 +1,5 @@
 package club.maxstats.tabstats;
 
-import club.maxstats.tabstats.config.TabStatsConfig;
 import club.maxstats.tabstats.command.TabStatsCommand;
 import club.maxstats.tabstats.listener.GameOverlayListener;
 import club.maxstats.tabstats.listener.JoinWorldListener;
@@ -20,7 +19,6 @@ import java.util.Arrays;
 public class TabStats {
     private static TabStats tabStats;
     private WorldLoader statWorld;
-    private TabStatsConfig config;
 
     /* Pre Initialization Event, Called before the initialization of Forge */
     @Mod.EventHandler
@@ -31,7 +29,6 @@ public class TabStats {
     /* Initialization Event, Called during the initialization of Forge */
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        this.config = new TabStatsConfig();
         this.statWorld = new WorldLoader();
         this.registerListeners(this.statWorld, new GameOverlayListener(), new JoinWorldListener());
         this.registerCommands(new TabStatsCommand());
@@ -50,10 +47,6 @@ public class TabStats {
     /* used to register forge commands */
     private void registerCommands(ICommand... commands) {
         Arrays.stream(commands).forEachOrdered(ClientCommandHandler.instance::registerCommand);
-    }
-
-    public TabStatsConfig getConfig() {
-        return this.config;
     }
 
     public static TabStats getTabStats() { return tabStats; }
