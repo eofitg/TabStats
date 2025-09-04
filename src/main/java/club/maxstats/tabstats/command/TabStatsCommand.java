@@ -1,5 +1,6 @@
 package club.maxstats.tabstats.command;
 
+import club.maxstats.tabstats.TabStats;
 import club.maxstats.tabstats.config.TabStatsConfig;
 import club.maxstats.tabstats.util.ARGB;
 import net.minecraft.command.CommandBase;
@@ -10,6 +11,7 @@ import net.minecraft.util.ChatComponentText;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class TabStatsCommand extends CommandBase {
 
@@ -50,8 +52,14 @@ public class TabStatsCommand extends CommandBase {
             }
             case "apikey": {
                 if (args.length >= 2) {
-                    TabStatsConfig.setApiKey(args[1]);
-                    sender.addChatMessage(new ChatComponentText("§aAPI key set: " + TabStatsConfig.getApiKey()));
+                    String lastKey = TabStatsConfig.getApiKey();
+                    if (!Objects.equals(lastKey, args[1])) {
+                        TabStatsConfig.setApiKey(args[1]);
+                        TabStats.getTabStats().getStatWorld().clearCache();  // refresh player list
+                        sender.addChatMessage(new ChatComponentText("§aAPI key set: " + TabStatsConfig.getApiKey()));
+                    } else {
+                        sender.addChatMessage(new ChatComponentText("§aSame API key as before: " + TabStatsConfig.getApiKey()));
+                    }
                 } else {
                     sender.addChatMessage(new ChatComponentText("§eCurrent API key: " + TabStatsConfig.getApiKey()));
                 }
