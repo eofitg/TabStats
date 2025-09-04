@@ -64,6 +64,14 @@ public class HPlayer {
         }
     }
 
+    public HGameBase getGame(String gameName) {
+        return this.gameMap.get(gameName);
+    }
+
+    public List<Stat> getFormattedGameStats(String gameName) {
+        return this.getGame(gameName) == null ? new ArrayList<>() : this.getGame(gameName).getFormattedStatList();
+    }
+
     public String getPlayerUUID() {
         return this.playerUUID;
     }
@@ -79,10 +87,6 @@ public class HPlayer {
     public String getNickname() {
         return "Nickname Test";
 //        return nickName == null ? playerName : nickName;
-    }
-
-    public List<Stat> getFormattedGameStats(String gameName) {
-        return this.gameMap.get(gameName) == null ? new ArrayList<>() : this.gameMap.get(gameName).getFormattedStatList();
     }
 
     public void setNicked(boolean nicked) { this.nicked = nicked; }
@@ -119,7 +123,7 @@ public class HPlayer {
         }
         if (mvpPlusPlus.equalsIgnoreCase("SUPERSTAR")) {
             s = ChatColor.GOLD + "[MVP" + ChatColor.valueOf(rankColour) + "++" + ChatColor.GOLD + "] ";
-        } else if (!mvpPlusPlus.equalsIgnoreCase("SUPERSTAR")) {
+        } else {
             if (rank.equalsIgnoreCase("MVP_PLUS")) {
                 s = ChatColor.AQUA + "[MVP" + ChatColor.valueOf(rankColour) + "+" + ChatColor.AQUA + "] ";
             } else if (rank.equalsIgnoreCase("MVP")) {
@@ -142,7 +146,7 @@ public class HPlayer {
             }
         } catch (Exception ignored) {
         }
-        this.playerRank = s;
+        this.setPlayerRank(s);
     }
 
     public String getPlayerRank() {
@@ -151,9 +155,5 @@ public class HPlayer {
 
     public String getPlayerRankColor() {
         return this.playerRank == null || this.playerRank.isEmpty() ? "" : this.playerRank.substring(0, 2);
-    }
-
-    public HGameBase getGame(String gameName) {
-        return this.gameMap.get(gameName);
     }
 }
