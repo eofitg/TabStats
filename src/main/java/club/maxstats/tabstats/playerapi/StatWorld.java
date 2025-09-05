@@ -3,10 +3,7 @@ package club.maxstats.tabstats.playerapi;
 import club.maxstats.tabstats.playerapi.api.HypixelAPI;
 import club.maxstats.tabstats.playerapi.api.games.bedwars.Bedwars;
 import club.maxstats.tabstats.playerapi.api.games.duels.Duels;
-import club.maxstats.tabstats.playerapi.exception.ApiRequestException;
-import club.maxstats.tabstats.playerapi.exception.BadJsonException;
-import club.maxstats.tabstats.playerapi.exception.InvalidKeyException;
-import club.maxstats.tabstats.playerapi.exception.PlayerNullException;
+import club.maxstats.tabstats.playerapi.exception.*;
 import club.maxstats.tabstats.util.Multithreading;
 import com.google.gson.JsonObject;
 import net.minecraft.entity.player.EntityPlayer;
@@ -81,7 +78,7 @@ public class StatWorld {
                     Duels duels = new Duels(playerName, playerUUID, wholeObject);
 
                     hPlayer.addGames(bw, duels);
-                } catch (PlayerNullException | ApiRequestException | InvalidKeyException | BadJsonException ex) {
+                } catch (PlayerNullException | NonWhitelistedKeyException | ApiRequestException | InvalidKeyException | BadJsonException ex) {
                     this.addPlayer(uuid, hPlayer);
                     this.removeFromStatAssembly(uuid);
 

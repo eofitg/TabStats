@@ -32,7 +32,7 @@ public class HypixelAPI {
      * @throws PlayerNullException If Target Player UUID is returned Null from the Hypixel API
      * @throws ApiRequestException If any other exception is thrown during the request
      */
-    public JsonObject getWholeObject(String uuid) throws InvalidKeyException, PlayerNullException, ApiRequestException, BadJsonException {
+    public JsonObject getWholeObject(String uuid) throws InvalidKeyException, NonWhitelistedKeyException, PlayerNullException, ApiRequestException, BadJsonException {
         JsonObject obj = new JsonObject();
         if (key == null) {
             throw new InvalidKeyException();
@@ -56,7 +56,12 @@ public class HypixelAPI {
                 }
 
                 if (obj.get("player") == null) {
-                    if (obj.get("cause").getAsString().equalsIgnoreCase("Invalid API key")) throw new InvalidKeyException();
+                    String cause = obj.get("cause").getAsString();
+                    if (cause.equalsIgnoreCase("Invalid API key"))
+                        throw new InvalidKeyException();
+                    else if (cause.equalsIgnoreCase("IP address not whitelisted for this key"))
+                        throw new NonWhitelistedKeyException();
+
                     throw new PlayerNullException();
                 }
                 else if (obj.get("player").toString().equalsIgnoreCase("null"))
